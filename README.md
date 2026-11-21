@@ -10,37 +10,39 @@ Let WSLG use the Sway compositor
 ---
 ### Install
 
-1. Download the latest VHD package.
-
-Example:
-
+##### 1. Download the latest VHD package. Example:
 ```
 system.zip
 ```
 
-2. Extract the downloaded archive.
-
-After extraction, you should get:
-
+##### 2. Extract the downloaded archive. After extraction, you should get:
 ```
 system.vhd
 ```
 
-3. Open **WSL Settings**.
+##### 3. Open **WSL Settings**.
+<img width="478" height="408" alt="image" src="https://github.com/user-attachments/assets/31cbcec6-33a2-4c5f-939f-7508d4fb18c0" />
 
-4. Go to:
+##### 4. Go to `Developer -> Custom system distro` then select the extracted `system.vhd` file, example:
+<img width="1284" height="791" alt="image" src="https://github.com/user-attachments/assets/b5912fb7-8602-40a0-a947-037b5c1040ff" />
 
+##### 5. Enter the system distribution version using a terminal:
 ```
-Developer
-    -> Custom system distro
+wsl --system -u wslg
 ```
+<img width="625" height="158" alt="image" src="https://github.com/user-attachments/assets/de7f32bc-dd1d-4711-bd65-e04673b69abc" />
 
-5. Select the extracted `system.vhd` file, example:
-   <img width="1284" height="791" alt="image" src="https://github.com/user-attachments/assets/b5912fb7-8602-40a0-a947-037b5c1040ff" />
+##### 6. Copy the default configuration file:
+```
+cp /etc/sway/config /mnt/c/Users/[your user name]/swayconfig
+```
+<img width="1332" height="212" alt="image" src="https://github.com/user-attachments/assets/dcb439e1-f807-4df1-97c1-136214663d63" />
+
 
 ## Configuration
+For configuration instructions, please refer to (https://github.com/swaywm/sway/blob/master/config.in)
 
-configuration file（Suggested setting Mod4 to $mod）: https://github.com/swaywm/sway/blob/master/config.in
+configuration file path:
 ```
 C:\ProgramData\Microsoft\WSL\swayconfig or C:\Users\[your user name]\swayconfig
 ```
