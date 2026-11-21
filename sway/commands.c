@@ -124,6 +124,7 @@ static const struct cmd_handler command_handlers[] = {
 	{ "mark", cmd_mark },
 	{ "max_render_time", cmd_max_render_time },
 	{ "move", cmd_move },
+	{ "next_monitor", cmd_next_monitor },
 	{ "nop", cmd_nop },
 	{ "opacity", cmd_opacity },
 	{ "reload", cmd_reload },

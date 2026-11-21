@@ -1,95 +1,94 @@
-# sway
+# wslg-sway
+Let WSLG use the Sway compositor
 
-**[English][en]** - [عربي][ar] - [Azərbaycanca][az] - [Česky][cs] - [Deutsch][de] - [Dansk][dk] - [Español][es] - [Français][fr] - [ქართული][ge] - [Ελληνικά][gr] - [हिन्दी][hi] - [Magyar][hu] - [فارسی][ir] - [Italiano][it] - [日本語][ja] - [한국어][ko] - [Nederlands][nl] - [Norsk][no] - [Polski][pl] - [Português][pt] - [Română][ro] - [Русский][ru] - [Српски][sr] - [Svenska][sv] - [Türkçe][tr] - [Українська][uk] - [中文-简体][zh-CN] - [中文-繁體][zh-TW]
+---
+### Requirements
 
-sway is an [i3]-compatible [Wayland] compositor. Read the [FAQ]. Join the
-[IRC channel] \(#sway on irc.libera.chat).
+- Windows with WSL support
+- WSL version supporting custom distributions
 
-## Release Signatures
+---
+### Install
 
-Releases are signed with [E88F5E48] and published [on GitHub][GitHub releases].
+1. Download the latest VHD package.
 
-## Installation
+Example:
 
-### From Packages
+```
+system.zip
+```
 
-Sway is available in many distributions. Try installing the "sway" package for
-yours.
+2. Extract the downloaded archive.
 
-### Compiling from Source
+After extraction, you should get:
 
-Check out [this wiki page][Development setup] if you want to build the HEAD of
-sway and wlroots for testing or development.
+```
+system.vhd
+```
 
-Install dependencies:
+3. Open **WSL Settings**.
 
-* meson \*
-* [wlroots]
-* wayland
-* wayland-protocols \*
-* pcre2
-* json-c
-* pango
-* cairo
-* gdk-pixbuf2 (optional: additional image formats for system tray)
-* [swaybg] (optional: wallpaper)
-* [scdoc] (optional: man pages) \*
-* git (optional: version info) \*
+4. Go to:
 
-_\* Compile-time dep_
+```
+Developer
+    -> Custom system distro
+```
 
-Run these commands:
-
-    meson setup build/
-    ninja -C build/
-    sudo ninja -C build/ install
+5. Select the extracted `system.vhd` file, example:
+   <img width="1284" height="791" alt="image" src="https://github.com/user-attachments/assets/b5912fb7-8602-40a0-a947-037b5c1040ff" />
 
 ## Configuration
 
-If you already use i3, then copy your i3 config to `~/.config/sway/config` and
-it'll work out of the box. Otherwise, copy the sample configuration file to
-`~/.config/sway/config`. It is usually located at `/etc/sway/config`.
-Run `man 5 sway` for information on the configuration.
+configuration file（Suggested setting Mod4 to $mod）: https://github.com/swaywm/sway/blob/master/config.in
+```
+C:\ProgramData\Microsoft\WSL\swayconfig or C:\Users\[your user name]\swayconfig
+```
 
-## Running
+```
+Please configure the shortcut key to open the terminal as follows:
+set $term /mnt/c/Windows/System32/wsl.exe -- SWAYSOCK="$SWAYSOCK" foot
+bindsym $mod+t exec $term
+```
 
-Run `sway` from a TTY or from a display manager.
+```
+Please configure the shortcut keys to switch monitors:
+bindsym $mod+f11 next_monitor
+```
 
-[en]: https://github.com/swaywm/sway#readme
-[ar]: README.ar.md
-[az]: README.az.md
-[cs]: README.cs.md
-[de]: README.de.md
-[dk]: README.dk.md
-[es]: README.es.md
-[fr]: README.fr.md
-[ge]: README.ge.md
-[gr]: README.gr.md
-[hi]: README.hi.md
-[hu]: README.hu.md
-[ir]: README.ir.md
-[it]: README.it.md
-[ja]: README.ja.md
-[ko]: README.ko.md
-[nl]: README.nl.md
-[no]: README.no.md
-[pl]: README.pl.md
-[pt]: README.pt.md
-[ro]: README.ro.md
-[ru]: README.ru.md
-[sr]: README.sr.md
-[sv]: README.sv.md
-[tr]: README.tr.md
-[uk]: README.uk.md
-[zh-CN]: README.zh-CN.md
-[zh-TW]: README.zh-TW.md
-[i3]: https://i3wm.org/
-[Wayland]: http://wayland.freedesktop.org/
-[FAQ]: https://github.com/swaywm/sway/wiki
-[IRC channel]: https://web.libera.chat/gamja/?channels=#sway
-[E88F5E48]: https://keys.openpgp.org/search?q=34FF9526CFEF0E97A340E2E40FDE7BE0E88F5E48
-[GitHub releases]: https://github.com/swaywm/sway/releases
-[Development setup]: https://github.com/swaywm/sway/wiki/Development-Setup
-[wlroots]: https://gitlab.freedesktop.org/wlroots/wlroots
-[swaybg]: https://github.com/swaywm/swaybg/
-[scdoc]: https://git.sr.ht/~sircmpwn/scdoc
+```
+Similar configurations can prevent WSL for auto shutdown:
+exec_always /mnt/c/Windows/System32/wsl.exe -- swaybg -c 222222
+```
+
+---
+### VHD Permission Issue
+
+If there's this error: WsL/Service/CreateInstance/CreateVm/HCS/E_ACCESSDENIED
+
+1. Locate the VHD file.
+
+2. Open file properties.
+
+3. Add the `Users` group.
+
+4. Grant read and execute permissions.
+
+5. Restart WSL and try again.
+
+example:
+
+<img width="363" height="450" alt="image" src="https://github.com/user-attachments/assets/25c1f8ba-a522-4b76-be57-fa5ec156a317" />
+
+---
+## References
+
+The project is based on or inspired by:
+- freerdp  
+  https://github.com/FreeRDP/FreeRDP
+- sway  
+  https://github.com/swaywm/sway
+
+thank you:
+- wslg  
+  https://github.com/microsoft/wslg

@@ -14,6 +14,7 @@ project(
 
 add_project_arguments(
 	[
+		'-D_GNU_SOURCE',
 		'-DWLR_USE_UNSTABLE',
 		'-D_POSIX_C_SOURCE=200809L',
 
@@ -81,6 +82,11 @@ math = cc.find_library('m')
 rt = cc.find_library('rt')
 xcb_icccm = wlroots_features['xwayland'] ? dependency('xcb-icccm') : null_dep
 threads = dependency('threads') # for pthread_setschedparam and pthread_atfork
+
+winpr3 = dependency('winpr3')
+freerdp3 = dependency('freerdp3')
+freerdp_server3 = dependency('freerdp-server3')
+openssl = dependency('openssl')
 
 if get_option('sd-bus-provider') == 'auto'
 	if not get_option('tray').disabled()

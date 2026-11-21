@@ -84,6 +84,7 @@ sway_sources = files(
 	'commands/new_float.c',
 	'commands/new_window.c',
 	'commands/no_focus.c',
+	'commands/next_monitor.c',
 	'commands/nop.c',
 	'commands/output.c',
 	'commands/popup_during_fullscreen.c',
@@ -169,7 +170,7 @@ sway_sources = files(
 	'commands/input/middle_emulation.c',
 	'commands/input/natural_scroll.c',
 	'commands/input/pointer_accel.c',
-        'commands/input/rotation_angle.c',
+	'commands/input/rotation_angle.c',
 	'commands/input/repeat_delay.c',
 	'commands/input/repeat_rate.c',
 	'commands/input/scroll_button.c',
@@ -216,6 +217,22 @@ sway_sources = files(
 	'tree/view.c',
 	'tree/workspace.c',
 	'tree/output.c',
+
+	'backend/wsland/output.c',
+	'backend/wsland/backend.c',
+	'backend/wsland/server/server.c',
+	'backend/wsland/server/client.c',
+	'backend/wsland/server/crypto.c',
+	'backend/wsland/server/handle.c',
+	'backend/wsland/server/keyboard.c',
+	'backend/wsland/server/channel/drdynvc.c',
+	'backend/wsland/server/channel/audiorx.c',
+	'backend/wsland/server/channel/audiotx.c',
+	'backend/wsland/server/channel/gfxredir.c',
+	'backend/wsland/server/channel/clipboard.c',
+	'backend/wsland/server/channel/rdpgfx.c',
+	'backend/wsland/server/channel/disp.c',
+	'backend/wsland/server/channel/rail.c',
 )
 
 sway_deps = [
@@ -235,6 +252,11 @@ sway_deps = [
 	xkbcommon,
 	xcb,
 	xcb_icccm,
+
+	winpr3,
+	freerdp3,
+	freerdp_server3,
+	openssl,
 ]
 
 if wlroots_features['xwayland']

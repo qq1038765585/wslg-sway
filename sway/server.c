@@ -7,6 +7,7 @@
 #include <wlr/backend/headless.h>
 #include <wlr/backend/multi.h>
 #include <wlr/config.h>
+#include <wlr/render/pixman.h>
 #include <wlr/render/allocator.h>
 #include <wlr/render/wlr_renderer.h>
 #include <wlr/types/wlr_alpha_modifier_v1.h>
@@ -60,6 +61,8 @@
 #include "sway/desktop/idle_inhibit_v1.h"
 #include "sway/input/input-manager.h"
 #include "sway/output.h"
+
+#include "sway/backend/wsland/wsland.h"
 #include "sway/server.h"
 #include "sway/input/cursor.h"
 #include "sway/tree/root.h"
@@ -265,15 +268,15 @@ bool server_init(struct sway_server *server) {
 		return false;
 	}
 
-	server->backend = wlr_backend_autocreate(server->wl_event_loop, &server->session);
+	server->backend = wlr_wsland_backend_create(server->wl_event_loop);
 	if (!server->backend) {
 		sway_log(SWAY_ERROR, "Unable to create backend");
 		return false;
 	}
 
-	wlr_multi_for_each_backend(server->backend, detect_proprietary, NULL);
+	// wlr_multi_for_each_backend(server->backend, detect_proprietary, NULL);
 
-	server->renderer = wlr_renderer_autocreate(server->backend);
+	server->renderer = wlr_pixman_renderer_create();
 	if (!server->renderer) {
 		sway_log(SWAY_ERROR, "Failed to create renderer");
 		return false;
@@ -664,7 +667,7 @@ bool server_init(struct sway_server *server) {
 
 	// Avoid using "wayland-0" as display socket
 	char name_candidate[16];
-	for (unsigned int i = 1; i <= 32; ++i) {
+	for (unsigned int i = 0; i < 32; ++i) {
 		snprintf(name_candidate, sizeof(name_candidate), "wayland-%u", i);
 		if (wl_display_add_socket(server->wl_display, name_candidate) >= 0) {
 			server->socket = strdup(name_candidate);
@@ -684,7 +687,7 @@ bool server_init(struct sway_server *server) {
 		wlr_backend_destroy(server->backend);
 		return false;
 	} else {
-		wlr_multi_backend_add(server->backend, server->headless_backend);
+		// wlr_multi_backend_add(server->backend, server->headless_backend);
 	}
 
 	struct wlr_output *wlr_output =
