@@ -558,12 +558,6 @@ BOOL wlr_wsland_server_adjust_monitor_layout(struct wlr_wsland_client *client, i
             wl_list_remove(&wwm->link);
             free(wwm);
         }
-
-        // ReSharper disable once CppUnreachableCode
-        if (client->current_output) {
-            client->monitor = (struct wlr_wsland_monitor) {0};
-            client->current_output = NULL;
-        }
     }
 
     // ReSharper disable once CppUnreachableCode
